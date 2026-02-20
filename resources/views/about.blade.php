@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout meta-title="Nosotros">
     {{-- Todo lo que pongas aquí adentro se inyectará donde pusiste {{ $slot }} en el layout --}}
 
     <header class="hero-section text-center">

@@ -1,4 +1,11 @@
-<x-layout>
+<x-layout meta-title="Blog">
+    <!--@dump($posts)-->
+
+    <!--recorrer el array de posts y mostrar cada título-->
+    @foreach($posts as $post)
+        <p>{{ $post->title }} - {{ $post->description ?? 'Sin descripción' }}</p>
+    @endforeach
+
     <div class="container">
         <div class="row">
             <div class="col-md-8">
