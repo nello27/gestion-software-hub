@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout meta-title="Bienvenido a Gestión" meta-description="La herramienta definitiva para el seguimiento de procesos, construida con la potencia de Laravel." >
 
     <header class="hero-gradient">
         <div class="container">

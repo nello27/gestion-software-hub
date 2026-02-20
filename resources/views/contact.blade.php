@@ -3,7 +3,7 @@
     ['nombre' => $user, 'email' => $mail] = $data; 
 --}}
 
-<x-layout>
+<x-layout meta-title="Contactenos" >
 
 <div class="container">
     <div class="card contact-card">
