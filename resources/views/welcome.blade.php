@@ -7,7 +7,7 @@
                     <h1 class="display-3 fw-bold mb-4">Automatiza tus procesos con Inteligencia</h1>
                     <p class="lead mb-5">La herramienta definitiva para el seguimiento de procesos, construida con la potencia de Laravel.</p>
                     <div class="d-flex gap-3">
-                        <a href="{{ route('blog') }}" class="btn btn-light btn-lg px-5 fw-bold">Ver Blog</a>
+                        <a href="{{ route('posts.index') }}" class="btn btn-light btn-lg px-5 fw-bold">Ver Blog</a>
                         <a href="#features" class="border-t-neutral-500 btn btn-outline-light btn-lg px-5 fw-bold">Características</a>
                     </div>
                 </div>

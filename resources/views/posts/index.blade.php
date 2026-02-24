@@ -1,9 +1,15 @@
 <x-layout meta-title="Blog">
     <!--@dump($posts)-->
 
+    <li class="nav-item"><a class="nav-link" href="{{ route('posts.create') }}">Crear</a></li>
+
     <!--recorrer el array de posts y mostrar cada título-->
     @foreach($posts as $post)
-        <p>{{ $post->title }} - {{ $post->description ?? 'Sin descripción' }}</p>
+        <p>
+            <a href="{{ route('posts.show', $post ) }}">
+                {{ $post->title }} - {{ $post->description ?? 'Sin descripción' }}
+            </a>
+        </p>
     @endforeach
 
     <div class="container">

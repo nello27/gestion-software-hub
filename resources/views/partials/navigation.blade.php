@@ -6,7 +6,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('blog') }}">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('posts.index') }}">Blog</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">Nosotros</a></li>
                     <li class="nav-item"><a class="nav-link btn btn-primary text-white px-4 ms-lg-3" href="{{ route('contact') }}">Contacto</a></li>
                 </ul>
