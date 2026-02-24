@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -20,9 +21,9 @@ class PostController extends Controller
             ['title' => 'Cuarto titulo', 'description' => 'Descripción del cuarto post'],
         ];*/
 
-        $posts = DB::table('posts')->get();
+        $posts = Post::get();
 
-        return view('blog', ['posts' => $posts]);
+        return view('posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -30,7 +31,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return "Estais en el create";
     }
 
     /**
@@ -44,9 +45,14 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        //
+        //$result = Post::findOrFail($id);
+        //return $post;
+
+
+        return view('posts.show', ['post' => $post]);
+
     }
 
     /**
