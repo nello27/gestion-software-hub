@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Post;
+use App\Models\Category;
+use App\Models\Service;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -24,6 +26,16 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Post::factory(10)->create();
+
+        Category::factory()->count(4)->create();
+
+        $categories = Category::all();
+
+        foreach ($categories as $category) {
+            Service::factory(3)->create([
+                'category_id' => $category->id
+            ]);
+        }
 
     }
 }
