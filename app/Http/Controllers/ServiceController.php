@@ -34,11 +34,6 @@ class ServiceController extends Controller
 
         $service = new Service;
 
-   
-
-        
-
-
         return $request;
     }
 
@@ -65,7 +60,7 @@ class ServiceController extends Controller
      */
     public function update(Request $request, Service $service)
     {
-        //
+        return 'Hola viejo';
     }
 
     /**

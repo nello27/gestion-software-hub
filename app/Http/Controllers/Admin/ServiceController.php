@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\ServiceRequest;
 
 class ServiceController extends Controller
 {
@@ -14,9 +15,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services =  Service::with('category')->get();
+        $service =  Service::with('category')->get();
 
-        return view('services.Admin.list', ['services' => $services]);
+        return view('services.Admin.list', ['services' => $service]);
     }
 
     /**
@@ -32,7 +33,7 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**
@@ -40,28 +41,37 @@ class ServiceController extends Controller
      */
     public function show(Service $service)
     {
-        $service->load('category');
 
-        $categories = Category::all(); // Traes todas las categorías
-
-
-        return view('services.Admin.edit', ['services' => $service, 'categories' => $categories]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Service $service)
     {
-        //
+        $categories = Category::all();
+
+        return view('services.Admin.edit', [
+            'service' => $service,     // ⚠️ Aquí es clave
+            'categories' => $categories
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ServiceRequest $request, Service $service)
     {
-        //
+        $data = $request->validated();
+
+        // Manejar checkbox
+        $data['active'] = $request->has('active') ? 1 : 0;
+
+        $service->update($data);
+
+        session()->flash('status','Servicio actualizado');
+
+        return to_route('services.Admin.list');
     }
 
     /**
