@@ -1,5 +1,17 @@
 <x-layout meta-title="Admin Servicios">
 
+@session('status')
+    <script>
+        Swal.fire({
+            title: '¡Operación Exitosa!',
+            text: "{{ session('status') }}",
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#3085d6', // Un azul estándar profesional
+        });
+    </script>
+@endsession
+
 <div class="container py-5">
 
     <!-- Título -->

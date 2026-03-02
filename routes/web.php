@@ -19,7 +19,9 @@ Route::get('services',[ServiceController::class,'index'])->name('services.index'
 
 Route::get('/admin/services',[AdminServiceController::class,'index'])->name('services.Admin.list');
 
-Route::get('/admin/services_edit/{service}',[AdminServiceController::class,'show'])->name('services.Admin.edit');
+Route::patch('/admin/services/{service}',[AdminServiceController::class,'update'])->name('services.Admin.update');
+
+Route::get('/admin/services/{service}/edit',[AdminServiceController::class,'edit'])->name('services.Admin.edit');
 
 Route::get('/services/{service}',[ServiceController::class,'show'])->name('services.show');
 
