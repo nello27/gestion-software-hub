@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service_Request;
 use Illuminate\Http\Request;
+use App\Http\Requests\ServiceRequestRequest;
 
 class ServiceRequestController extends Controller
 {
@@ -26,9 +27,10 @@ class ServiceRequestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ServiceRequestRequest $request)
     {
-        $service_Request = new Service_Request;
+
+        /*$service_Request = new Service_Request;
 
         $service_Request->service_id = $request->input('service_id');
         $service_Request->name = $request->input('name');
@@ -37,8 +39,13 @@ class ServiceRequestController extends Controller
         $service_Request->message = $request->input('message');
         $service_Request->status = 'Pendiente';
         
-        $service_Request->save();
-        
+        $service_Request->save();*/
+
+            $data = $request->validated();
+            $data['status'] = 'Pendiente';
+
+            Service_Request::create($data);
+                
         session()->flash('status','Su solicitud fue enviada a nuestro equipo, se le enviara un correo una vez tengamos su cotización');
 
         return to_route('services.index');

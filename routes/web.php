@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceRequestController;
-
+use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 
 
 Route::view('/', 'welcome')->name('home');
@@ -16,6 +16,10 @@ Route::get('blog',[PostController::class, 'index'])->name('posts.index');
 Route::get('/blog/create',[PostController::class, 'create'])->name('posts.create');
 
 Route::get('services',[ServiceController::class,'index'])->name('services.index');
+
+Route::get('/admin/services',[AdminServiceController::class,'index'])->name('services.Admin.list');
+
+Route::get('/admin/services_edit/{service}',[AdminServiceController::class,'show'])->name('services.Admin.edit');
 
 Route::get('/services/{service}',[ServiceController::class,'show'])->name('services.show');
 
