@@ -5,9 +5,9 @@
 
 <x-layout meta-title="Contactenos" >
 
-<div class="container">
-    <div class="card contact-card">
-        <div class="card-header bg-primary text-white text-center py-4">
+<div class="container-sm py-3 d-flex justify-content-center">
+    <div class="card contact-card shadow-sm border-0" style="max-width: 800px; width: 100%;">
+        <div class="card-header bg-dark text-white text-center py-2">
             <h3>Contacta con {{ $nombre ?? 'nuestro equipo' }}</h3>
         </div>
         <div class="card-body p-4">
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg">Enviar Mensaje</button>
+                    <button type="submit" class="btn btn-dark btn-lg">Enviar Mensaje</button>
                 </div>
             </form>
         </div>
