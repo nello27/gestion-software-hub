@@ -12,9 +12,11 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $services =  Service::with('category')->get();
+        //$services =  Service::with('category')->get();
 
-        return view('services.index', ['services' => $services]);
+        $service = Service::with('category')->paginate(6);
+
+        return view('services.index', ['services' => $service]);
         
     }
 
