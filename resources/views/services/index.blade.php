@@ -66,6 +66,11 @@
         <!-- Fin Card -->
     
         @endforeach
+
+                            <!--Importante para paginación-->
+                <div class="p-3">
+                    {{ $services->links('pagination::bootstrap-5') }}
+                </div>
     </div>
     
 </section>
