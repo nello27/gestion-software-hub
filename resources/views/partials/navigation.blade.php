@@ -36,7 +36,7 @@
                         <li>
                          <a class="dropdown-item" href="{{ route('services.Admin.list') }}">Admin Servicios</a>
                         </li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="{{ route("request.Admin.list") }}">Cotizaciones</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
@@ -63,12 +63,12 @@
                 </li>
 
                 <!-- CTA -->
-                <li class="nav-item ms-lg-3">
+                <!--<li class="nav-item ms-lg-3">
                     <a class="btn btn-primary px-4 rounded-pill fw-semibold"
                        href="{{ route('contact') }}">
                         Contacto
                     </a>
-                </li>
+                </li>-->
 
             </ul>
         </div>

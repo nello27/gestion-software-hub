@@ -57,10 +57,12 @@
                         </div>
                     @enderror
                 </div>
+
+                @if($services->id != '13' )
                 <div class="mb-3">
                     <strong for="price" class="form-label">Precio inicial: $USD {{ $services->price }}</strong>                    
                 </div>
-
+                @endif
                 <div class="mb-3">
                     <label for="message" class="form-label">Mensaje</label>
                     <textarea class="form-control" id="message" name="message" rows="4" placeholder="¿En qué podemos ayudarte?"> {{ old('message') }} </textarea>

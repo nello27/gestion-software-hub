@@ -11,12 +11,17 @@
             <h3>Contacta con {{ $nombre ?? 'nuestro equipo' }}</h3>
         </div>
         <div class="card-body p-4">
-            <form action="/enviar-contacto" method="POST">
+            <form action="{{ route('services_request.store') }}" method="POST">
                 @csrf {{-- Token de seguridad obligatorio en Laravel --}}
                 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre completo</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Ej: Juan Pérez">
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" id="phone" name="phone">
                 </div>
 
                 <div class="mb-3">

@@ -14,14 +14,6 @@
 
 <div class="container py-5">
 
-    <!-- Título -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">Listado de Servicios</h2>
-        <a href="#" class="btn btn-primary">
-            + Nuevo Servicio
-        </a>
-    </div>
-
     <!-- Card contenedora -->
     <div class="card shadow-sm border-0">
         <div class="card-body p-0">
@@ -31,10 +23,12 @@
                     
                     <thead class="table-dark">
                         <tr>
+                            <th>Nombre</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
                             <th>Servicio</th>
-                            <th>Categoría</th>
-                            <th>Descripción</th>
-                            <th class="text-end">Precio</th>
+                            <th>Mensaje</th>
+                            <th class="text-center">Estado</th>
                             <th class="text-center">Editar</th>
                         </tr>
                     </thead>
@@ -46,14 +40,17 @@
                   
                         <tr>
                             <td>{{ $service->name }}</td>
-                            <td>{{ $service->category->name }}</td>
-                            <td>{{ $service->description }}</td>
-                            <td class="text-end"><strong>USD</strong> {{ $service->price }}</td>
+                            <td>{{ $service->email }}</td>
+                            <td>{{ $service->phone }}</td>
+                            <td>{{ $service->service->name }}</td>
+                            <td>{{ $service->message }}</td>
+                            <td>{{ $service->status }}</td>
                             <td class="text-center">
-                                <a href="{{ route('services.Admin.edit', $service->id) }}"  class="btn btn-sm btn-outline-primary">
+                            <a href="{{ route('request.Admin.edit', $service->id) }}"  class="btn btn-sm btn-outline-primary">
                                     Editar
                                 </a>
                             </td>
+                            
                         </tr>
                         
                         @endforeach

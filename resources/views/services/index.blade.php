@@ -27,30 +27,35 @@
     <div class="row g-4">
 
          @foreach($services as $service)
+
+       
         <!-- Card Servicio -->
         <div class="col-md-6 col-lg-4">
             <div class="card h-100 shadow-sm border-0">
 
                 <div class="card-body d-flex flex-column">
 
+                   
                     <h5 class="card-title fw-bold">
                         {{ $service->name }}
                     </h5>
-
+                    
+                     @if($service->id != '13')
                     <span class="badge bg-primary mb-3 align-self-start">
                         {{ $service->category->name }}
                     </span>
-
+                    @endif
                     <p class="card-text text-muted">
                         {{ $service->description }}
                     </p>
 
                     <div class="mt-auto">
 
+                        @if($service->id != '13')
                         <h4 class="fw-bold text-dark">
                             $USD  {{ $service->price }}
                         </h4>
-
+                        @endif
                         <a href="{{ route('services.show', $service->id) }}" 
                         class="btn btn-dark w-100 mt-3">
                             Solicitar Cotización
@@ -62,7 +67,7 @@
 
             </div>
         </div>
-
+        
         <!-- Fin Card -->
     
         @endforeach

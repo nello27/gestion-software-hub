@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
+use App\Http\Controllers\Admin\ServicesRequestController as AdminServiceRequestController;
 
 
 Route::view('/', 'welcome')->name('home');
@@ -19,9 +20,15 @@ Route::get('services',[ServiceController::class,'index'])->name('services.index'
 
 Route::get('/admin/services',[AdminServiceController::class,'index'])->name('services.Admin.list');
 
+Route::get('/admin/servicesAdd',[AdminServiceController::class,'create'])->name('services.Admin.add');
+
 Route::patch('/admin/services/{service}',[AdminServiceController::class,'update'])->name('services.Admin.update');
 
 Route::get('/admin/services/{service}/edit',[AdminServiceController::class,'edit'])->name('services.Admin.edit');
+
+Route::get('/admin/services_request',[AdminServiceRequestController::class,'index'])->name('request.Admin.list');
+
+Route::get('/admin/services_request/{service}/edit',[AdminServiceRequestController::class,'edit'])->name('request.Admin.edit');
 
 Route::get('/services/{service}',[ServiceController::class,'show'])->name('services.show');
 

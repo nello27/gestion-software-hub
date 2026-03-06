@@ -2,25 +2,21 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Service;
-use App\Models\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\ServiceRequest;
+use App\Models\Service_Request;
+use App\Models\Service;
 
-class ServiceController extends Controller
+class ServicesRequestController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //$service =  Service::with('category')->get();
+        $services = Service_Request::with('service')->paginate(10);
 
-        //usamos paginación
-        $service = Service::with('category')->paginate(10);
-
-        return view('services.Admin.list', ['services' => $service]);
+        return view('request.Admin.list', ['services' => $services]);
     }
 
     /**
@@ -28,7 +24,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return "Vamos a crear";
+        //
     }
 
     /**
@@ -36,25 +32,25 @@ class ServiceController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Service $service)
+    public function show(string $id)
     {
-
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Service $service)
+    public function edit(Service_Request $service)
     {
-        $categories = Category::all();
+        $categories = Service::all();
 
-        return view('services.Admin.edit', [
+        return view('request.Admin.edit', [
             'service' => $service,     // ⚠️ Aquí es clave
             'categories' => $categories
         ]);
@@ -63,18 +59,9 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ServiceRequest $request, Service $service)
+    public function update(Request $request, string $id)
     {
-        $data = $request->validated();
-
-        // Manejar checkbox
-        $data['active'] = $request->has('active') ? 1 : 0;
-
-        $service->update($data);
-
-        session()->flash('status','Servicio actualizado');
-
-        return to_route('services.Admin.list');
+        //
     }
 
     /**
