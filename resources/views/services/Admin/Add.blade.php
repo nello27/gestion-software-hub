@@ -8,16 +8,16 @@
             <div class="card shadow-sm border-0">
                 
                 <div class="card-header bg-dark text-white">
-                    <h4 class="mb-0">Editar Servicio</h4>
+                    <h4 class="mb-0">Agregar Servicio</h4>
                 </div>
 
                 <div class="card-body">
 
-                    <form action="{{ route('services.Admin.update', $service)}}" method="POST">
+                    <form action="{{ route('services.Admin.store')}}" method="POST">
                         
                         @csrf
-                        @method('PATCH')
-
+                        
+                       
                         <!-- Servicio -->
                         <div class="mb-3">
                             <label for="name" class="form-label">Servicio</label>
@@ -25,8 +25,13 @@
                                    class="form-control" 
                                    id="name" 
                                    name="name"
-                                   placeholder="Nombre del servicio" value="{{ $service->name }}">
+                                   placeholder="Nombre del servicio" value="">
                         </div>
+                        @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
 
                         <!-- Categoría -->
 
@@ -37,9 +42,8 @@
                             <option value="" disabled>Seleccione una categoría</option>
 
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}"
-                                    {{ old('category_id', $service->category_id) == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name }}
+                                <option value="{{ $category->id }}        
+                                    ">{{ $category->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -53,7 +57,7 @@
                                       id="description" 
                                       name="description" 
                                       rows="4"
-                                      placeholder="Descripción del servicio">{{ $service->description }}</textarea>
+                                      placeholder="Descripción del servicio"></textarea>
                         </div>
 
                         <!-- Precio -->
@@ -66,7 +70,7 @@
                                        id="price" 
                                        name="price"
                                        placeholder="0.00"
-                                       step="0.01" value="{{ $service->price }}">
+                                       step="0.01" value="">
                             </div>
                         </div>
 
@@ -77,7 +81,7 @@
                             </a>
 
                             <button type="submit" class="btn btn-primary">
-                                Actualizar Servicio
+                            Crear Servicio
                             </button>
                         </div>
 

@@ -22,6 +22,8 @@ Route::get('/admin/services',[AdminServiceController::class,'index'])->name('ser
 
 Route::get('/admin/servicesAdd',[AdminServiceController::class,'create'])->name('services.Admin.add');
 
+Route::post('/admin/servicesstore',[AdminServiceController::class,'store'])->name('services.Admin.store');
+
 Route::patch('/admin/services/{service}',[AdminServiceController::class,'update'])->name('services.Admin.update');
 
 Route::get('/admin/services/{service}/edit',[AdminServiceController::class,'edit'])->name('services.Admin.edit');

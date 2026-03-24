@@ -17,7 +17,7 @@
     <!-- Título -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold">Listado de Servicios</h2>
-        <a href="#" class="btn btn-primary">
+        <a href="{{ route('services.Admin.add') }}" class="btn btn-primary">
             + Nuevo Servicio
         </a>
     </div>

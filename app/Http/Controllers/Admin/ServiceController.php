@@ -28,15 +28,29 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        return "Vamos a crear";
+        $categories = Category::all();
+
+        return view('services.Admin.add', [
+            'categories' => $categories
+        ]);
+        //return "Vamos a crear";
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ServiceRequest $request)
     {
-        return $request;
+        //return $request;
+
+            $data = $request->validated();
+            $data['active'] = 1;
+
+            Service::create($data);
+                
+        session()->flash('status','Se ha creado el servicio');
+
+        return to_route('services.Admin.list');
     }
 
     /**
