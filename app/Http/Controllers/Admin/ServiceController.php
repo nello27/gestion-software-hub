@@ -94,8 +94,17 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Service $service)
     {
-        //
+       // return "Estamos en el metodos destroy ". $service;
+
+        $servicename = $service->name; //  aquí obtenemos el nombre del servicio
+
+        $service->delete();
+
+        session()->flash('status', "Se eliminó el servicio: $servicename");
+
+        return to_route('services.Admin.list');
+
     }
 }
