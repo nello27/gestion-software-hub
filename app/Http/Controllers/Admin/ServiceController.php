@@ -30,7 +30,7 @@ class ServiceController extends Controller
     {
         $categories = Category::all();
 
-        return view('services.Admin.add', [
+        return view('services.Admin.Add', [
             'categories' => $categories
         ]);
         //return "Vamos a crear";
