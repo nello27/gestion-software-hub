@@ -6,6 +6,9 @@ use App\Models\Service_Request;
 use Illuminate\Http\Request;
 use App\Http\Requests\ServiceRequestRequest;
 
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ServiceRequestCreated;
+
 class ServiceRequestController extends Controller
 {
     /**
@@ -41,12 +44,18 @@ class ServiceRequestController extends Controller
         
         $service_Request->save();*/
 
-            $data = $request->validated();
-            $data['status'] = 'Pendiente';
+        $data = $request->validated();
+        $data['status'] = 'Pendiente';
 
-            Service_Request::create($data);
-                
-        session()->flash('status','Su solicitud fue enviada a nuestro equipo, se le enviara un correo una vez tengamos su cotización');
+        $serviceRequest = Service_Request::create($data);
+
+        // 🔥 Enviar correo al usuario
+        Mail::to($data['email'])->send(new ServiceRequestCreated($serviceRequest));
+
+        session()->flash(
+            'status',
+            'Su solicitud fue enviada. Recibirá un correo de confirmación.'
+        );
 
         return to_route('services.index');
 

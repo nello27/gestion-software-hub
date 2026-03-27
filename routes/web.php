@@ -7,6 +7,20 @@ use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\ServicesRequestController as AdminServiceRequestController;
 
+use Illuminate\Support\Facades\Mail;
+
+
+Route::get('/test-email', function () {
+    $data = ['name' => 'Visitante de mi Portafolio'];
+
+    Mail::raw('¡Éxito! Laravel y Mailtrap están conectados correctamente.', function ($message) {
+        $message->to(config('mail.from.address'))
+                ->subject('Prueba de Conexión SMTP');
+    });
+
+    return "Revisa tu bandeja de entrada en Mailtrap.io";
+});
+
 
 Route::view('/', 'welcome')->name('home');
 
@@ -27,6 +41,8 @@ Route::post('/admin/servicesstore',[AdminServiceController::class,'store'])->nam
 Route::patch('/admin/services/{service}',[AdminServiceController::class,'update'])->name('services.Admin.update');
 
 Route::get('/admin/services/{service}/edit',[AdminServiceController::class,'edit'])->name('services.Admin.edit');
+
+Route::delete('/admin/services/{service}/destroy',[AdminServiceController::class,'destroy'])->name('services.Admin.destroy');
 
 Route::get('/admin/services_request',[AdminServiceRequestController::class,'index'])->name('request.Admin.list');
 

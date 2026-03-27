@@ -36,6 +36,7 @@
                             <th>Descripción</th>
                             <th class="text-end">Precio</th>
                             <th class="text-center">Editar</th>
+                            <th class="text-center">Borrar</th>
                         </tr>
                     </thead>
 
@@ -53,6 +54,17 @@
                                 <a href="{{ route('services.Admin.edit', $service->id) }}"  class="btn btn-sm btn-outline-primary">
                                     Editar
                                 </a>
+                            </td>
+                            <td class="text-center">
+
+                                <form action="{{ route('services.Admin.destroy', $service->id) }}" method="POST">
+                                        @csrf
+
+                                        @method('DELETE')
+
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">Borrar</button>
+
+                                </form>
                             </td>
                         </tr>
                         
