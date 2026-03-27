@@ -32,6 +32,7 @@ class ServiceRequest extends FormRequest
     public function messages()
     {
         return [
+            
             'name.required' => 'El nombre del servicio es obligatorio.',
             'name.max' => 'El nombre no puede superar 255 caracteres.',
 

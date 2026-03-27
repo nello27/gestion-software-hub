@@ -1,23 +1,16 @@
 <x-layout meta-title="Editar Servicios">
 
-<div class="container py-5">
-
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-
-            <div class="card shadow-sm border-0">
-                
-                <div class="card-header bg-dark text-white">
-                    <h4 class="mb-0">Agregar Servicio</h4>
-                </div>
-
-                <div class="card-body">
-
+<div class="container-sm py-3 d-flex justify-content-center">
+    <div class="card contact-card shadow-sm border-0" style="max-width: 800px; width: 100%;">
+        <div class="card-header bg-dark text-white text-center py-2">
+            <h3>Agregar Servicio</h3>
+        </div>
+        <div class="card-body p-4">
+                <!--@dump($errors->all())-->
                     <form action="{{ route('services.Admin.store')}}" method="POST">
                         
-                        @csrf
+                        @csrf {{-- Token de seguridad obligatorio en Laravel --}}
                         
-                       
                         <!-- Servicio -->
                         <div class="mb-3">
                             <label for="name" class="form-label">Servicio</label>
@@ -25,10 +18,10 @@
                                    class="form-control" 
                                    id="name" 
                                    name="name"
-                                   placeholder="Nombre del servicio" value="">
+                                   placeholder="Nombre del servicio" value="{{ old('name') }}">
                         </div>
                         @error('name')
-                            <div class="invalid-feedback">
+                            <div class="invalid-feedback d-block">
                                 {{ $message }}
                             </div>
                         @enderror
@@ -39,14 +32,25 @@
                             <label for="category" class="form-label">Categoría</label>
                             
                         <select class="form-select" id="category" name="category_id">
-                            <option value="" disabled>Seleccione una categoría</option>
+    
+                            <option value="" disabled {{ old('category_id') ? '' : 'selected' }}>
+                                Seleccione una categoría
+                            </option>
 
                             @foreach($categories as $category)
-                                <option value="{{ $category->id }}        
-                                    ">{{ $category->name }}
+                                <option value="{{ $category->id }}" 
+                                    {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                    {{ $category->name }}
                                 </option>
                             @endforeach
+
                         </select>
+
+                        @error('category_id')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
                            
                         </div>
 
@@ -57,8 +61,14 @@
                                       id="description" 
                                       name="description" 
                                       rows="4"
-                                      placeholder="Descripción del servicio"></textarea>
+                                      placeholder="Descripción del servicio">{{ old('description') }}</textarea>
                         </div>
+
+                        @error('description')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
 
                         <!-- Precio -->
                         <div class="mb-4">
@@ -70,9 +80,15 @@
                                        id="price" 
                                        name="price"
                                        placeholder="0.00"
-                                       step="0.01" value="">
+                                       step="0.01" value="{{ old('price') }}">
                             </div>
                         </div>
+
+                        @error('price')
+                            <div class="invalid-feedback d-block">
+                                {{ $message }}
+                            </div>
+                        @enderror
 
                         <!-- Botones -->
                         <div class="d-flex justify-content-between">
