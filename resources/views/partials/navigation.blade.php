@@ -38,7 +38,7 @@
                         </li>
                         <li><a class="dropdown-item" href="{{ route("request.Admin.list") }}">Cotizaciones</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item" href="#">Otra Opción "En desarrollo"</a></li>
                     </ul>
                 </li>
 
@@ -50,11 +50,11 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <!--<li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('posts.index') }}">
                         Blog
                     </a>
-                </li>
+                </li>-->
 
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('about') }}">
