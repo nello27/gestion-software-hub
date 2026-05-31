@@ -1,59 +1,78 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# 🚀 Gestión - Plataforma de Servicios de Software & Arquitectura DevOps
 
-## About Laravel
+Una aplicación web moderna diseñada para la visualización, categorización y cotización dinámica de servicios de ingeniería de software, optimización de infraestructura cloud y soluciones Full Stack.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Este repositorio fue desarrollado con un enfoque especial en **UI/UX limpio (Bootstrap 5)**, **arquitectura modular (Laravel 12)** y **simulación interactiva** ideal para evaluaciones técnicas y revisión de portafolio.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠️ Stack Tecnológico
 
-## Learning Laravel
+- **Backend:** PHP 8.2+ & Laravel 12.x (Arquitectura MVC, Blade Components, Eloquent ORM)
+- **Frontend:** Bootstrap 5, Custom CSS3 Moderno, Animaciones Nativas
+- **Base de Datos:** SQLite / SQL Server / MySQL (Soporte Multi-motor)
+- **Librerías Clave:** SweetAlert2 (Notificaciones interactivas nativas)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ✨ Características Destacadas
 
-## Laravel Sponsors
+* **Hero Section Dinámica:** Mockup interactivo que simula un pipeline de CI/CD (Despliegue Continuo con estados en ejecución mediante animaciones CSS puras).
+* **Catálogo de Servicios Inteligente:** Grilla responsiva con renderizado dinámico de precios formateados monetariamente y categorización inteligente (*Badges*) automatizada por backend.
+* **Simulación de Flujo Libre:** El aplicativo tiene deshabilitada temporalmente la autenticación rígida de forma intencional en las vistas públicas. Esto permite a los entrevistadores y evaluadores probar la experiencia completa de navegación, CRUDs y simulación de cotizaciones sin fricciones de inicio de sesión.
+* **Paginación Nativa:** Control de flujo de datos optimizado directo desde base de datos.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## 🚀 Instrucciones de Instalación Local
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Si deseas clonar este proyecto y ejecutarlo en tu entorno local, sigue estos sencillos pasos:
 
-## Contributing
+### 1. Clonar el repositorio e instalar dependencias de PHP
+```bash
+git clone https://github.com/nello27/Laravel-Blog.git
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. Configurar el archivo de entorno
 
-## Code of Conduct
+Copia el archivo de ejemplo para crear tu entorno local:
+Bash
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+cp .env.example .env
 
-## Security Vulnerabilities
+3. Inicializar la Base de Datos (SQLite)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Crea el archivo físico para la base de datos local y asegúrate de que tu .env tenga configurado DB_CONNECTION=sqlite.
+Bash
 
-## License
+# En Windows (PowerShell)
+New-Item -Path "database\database.sqlite" -ItemType File
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# En Linux / Mac / Git Bash
+touch database/database.sqlite
+
+4. Ejecutar Migraciones y Datos de Prueba (Seeders)
+
+Prepara las tablas y carga los 12 servicios de software iniciales automatizados con los seeders:
+Bash
+
+php artisan migrate:fresh --seed
+
+5. Generar la clave de la aplicación y arrancar
+Bash
+
+php artisan key:generate
+php artisan serve
+
+Accede a la aplicación en tu navegador en: http://127.0.0.1:8000
+📐 Detalles de Implementación Técnica
+
+    Estructura Limpia: Uso exhaustivo de componentes Blade (<x-layout>) para evitar duplicación de código en el Frontend.
+
+    Optimización de Consultas: Uso eficiente de relaciones Eloquent para mapear los servicios con sus respectivas categorías sin incurrir en el problema de consultas N+1.
+
+    Inyección de Scripts Dinámicos: Captura de eventos de sesión con Blade (@session) combinados con SweetAlert2 para flujos interactivos sutiles y profesionales.
+
+✉️ Contacto / Portafolio
+
+Desarrollado por Nell Yesid Olaya Calderon - Systems Engineer & Software Developer.
