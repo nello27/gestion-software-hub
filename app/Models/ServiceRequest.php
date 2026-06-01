@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Service_Request extends Model
+//Cambiado a CamelCase limpio
+class ServiceRequest extends Model
 {
 
     // Forzamos el nombre de la tabla:

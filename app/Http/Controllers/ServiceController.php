@@ -36,7 +36,7 @@ class ServiceController extends Controller
 
         $service = new Service;
 
-        return $request;
+        return $service;
     }
 
     /**

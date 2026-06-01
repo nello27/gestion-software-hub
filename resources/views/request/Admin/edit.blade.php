@@ -12,9 +12,17 @@
                 </div>
 
                 <div class="card-body">
-
-                    <form action="{{ route('services.Admin.update', $service)}}" method="POST">
-                        
+                    @if ($errors->any())
+                        <div style="background-color: #f8d7da; color: #721c24; padding: 15px; margin-bottom: 20px; border: 1px solid #f5c6cb; border-radius: 4px;">
+                            <strong>¡Errores de validación!:</strong>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    <form method="POST" action="{{ route('request.Admin.update', $service_request) }}">
                         @csrf
                         @method('PATCH')
 
@@ -25,29 +33,31 @@
                                    class="form-control" 
                                    id="name" 
                                    name="name"
-                                   placeholder="Nombre del servicio" value="{{ $service->name }}">
+                                   placeholder="Nombre del servicio" value="{{ $service_request->name }}">
                         </div>
 
                         <!-- Email -->
 
                                             
                         <div class="mb-3">
-                            <label for="description" class="form-label">Email</label>
-                            <textarea class="form-control" 
-                                      id="description" 
-                                      name="description" 
-                                      rows="4"
-                                      placeholder="Descripción del servicio">{{ $service->email }}</textarea>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" 
+                                   class="form-control" 
+                                   id="email" 
+                                   name="email" 
+                                   placeholder="Email" 
+                                   value="{{ $service_request->email }}">
                         </div>
 
                         
                         <div class="mb-3">
-                            <label for="description" class="form-label">Télefono</label>
-                            <textarea class="form-control" 
-                                      id="description" 
-                                      name="description" 
-                                      rows="4"
-                                      placeholder="Descripción del servicio">{{ $service->email }}</textarea>
+                            <label for="phone" class="form-label">Télefono</label>
+                            <input type="text" 
+                                   class="form-control" 
+                                   id="phone" 
+                                   name="phone" 
+                                   placeholder="Télefono" 
+                                   value="{{ $service_request->phone }}">
                         </div>
 
                         <div class="mb-3">
@@ -58,7 +68,7 @@
 
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}"
-                                    {{ old('category_id', $service->category_id) == $category->id ? 'selected' : '' }}>
+                                    {{ old('category_id', $service_request->category_id) == $category->id ? 'selected' : '' }}>
                                     {{ $category->name }}
                                 </option>
                             @endforeach
@@ -68,25 +78,24 @@
 
                         <!-- Mensaje -->
                         <div class="mb-3">
-                            <label for="description" class="form-label">Mensaje</label>
+                            <label for="message" class="form-label">Mensaje</label>
                             <textarea class="form-control" 
-                                      id="description" 
-                                      name="description" 
+                                      id="message" 
+                                      name="message" 
                                       rows="4"
-                                      placeholder="Descripción del servicio">{{ $service->message }}</textarea>
+                                      placeholder="Descripción del servicio">{{ $service_request->message }}</textarea>
                         </div>
 
-                        <!-- Precio -->
+                        <!-- Estado -->
                         <div class="mb-4">
-                            <label for="price" class="form-label">Estado</label>
+                            <label for="status" class="form-label">Estado</label>
                             <div class="input-group">
-                                <span class="input-group-text">$</span>
-                                <input type="number" 
+                                <input type="text" 
                                        class="form-control text-end" 
-                                       id="price" 
-                                       name="price"
-                                       placeholder="0.00"
-                                       step="0.01" value="{{ $service->status }}">
+                                       id="status" 
+                                       name="status"
+                                       placeholder="Estado"
+                                       value="{{ $service_request->status }}">
                             </div>
                         </div>
 

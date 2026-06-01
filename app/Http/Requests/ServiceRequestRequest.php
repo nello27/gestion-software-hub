@@ -22,11 +22,12 @@ class ServiceRequestRequest extends FormRequest
     public function rules(): array
     {
             return [
-                'service_id' => ['required', 'integer', 'exists:services,id'],
+                #'service_id' => ['required', 'integer', 'exists:services,id'],
                 'name'       => ['required', 'string', 'max:255'],
                 'email' => ['required','email:rfc,dns'],
                 'phone' => ['nullable', 'regex:/^[0-9+\-\s]{7,20}$/'],
                 'message'    => ['required', 'string', 'max:2000'],
+                'price' => ['required', 'numeric', 'min:0'],
             ];
     }
 

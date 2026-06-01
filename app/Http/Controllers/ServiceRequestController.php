@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service_Request;
+use App\Models\ServiceRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\ServiceRequestRequest;
 
@@ -47,7 +47,7 @@ class ServiceRequestController extends Controller
         $data = $request->validated();
         $data['status'] = 'Pendiente';
 
-        $serviceRequest = Service_Request::create($data);
+        $serviceRequest = ServiceRequest::create($data);
 
         // 🔥 Enviar correo al usuario
         Mail::to($data['email'])->send(new ServiceRequestCreated($serviceRequest));
@@ -65,7 +65,7 @@ class ServiceRequestController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Service_Request $service_Request)
+    public function show(ServiceRequest $service_Request)
     {
         //
     }
@@ -73,7 +73,7 @@ class ServiceRequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Service_Request $service_Request)
+    public function edit(ServiceRequest $service_Request)
     {
         //
     }
@@ -81,7 +81,7 @@ class ServiceRequestController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Service_Request $service_Request)
+    public function update(Request $request, ServiceRequest $service_Request)
     {
         //
     }
@@ -89,7 +89,7 @@ class ServiceRequestController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Service_Request $service_Request)
+    public function destroy(ServiceRequest $service_Request)
     {
         //
     }

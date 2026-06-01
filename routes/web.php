@@ -44,9 +44,13 @@ Route::get('/admin/services/{service}/edit',[AdminServiceController::class,'edit
 
 Route::delete('/admin/services/{service}/destroy',[AdminServiceController::class,'destroy'])->name('services.Admin.destroy');
 
+
 Route::get('/admin/services_request',[AdminServiceRequestController::class,'index'])->name('request.Admin.list');
 
-Route::get('/admin/services_request/{service}/edit',[AdminServiceRequestController::class,'edit'])->name('request.Admin.edit');
+Route::patch('/admin/services_request/{service_request}', [AdminServiceRequestController::class, 'update'])->name('request.Admin.update');
+
+Route::get('/admin/services_request/{service_request}/edit',[AdminServiceRequestController::class,'edit'])->name('request.Admin.edit');
+
 
 Route::get('/services/{service}',[ServiceController::class,'show'])->name('services.show');
 

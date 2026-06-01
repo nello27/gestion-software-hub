@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Service_Request;
+use App\Models\ServiceRequest;
 use App\Models\Service;
+use App\Http\Requests\ServiceRequestRequest;
 
 class ServicesRequestController extends Controller
 {
@@ -14,7 +15,7 @@ class ServicesRequestController extends Controller
      */
     public function index()
     {
-        $services = Service_Request::with('service')->paginate(10);
+        $services = ServiceRequest::with('service')->paginate(10);
 
         return view('request.Admin.list', ['services' => $services]);
     }
@@ -46,22 +47,26 @@ class ServicesRequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Service_Request $service)
+    // 1. Método Edit
+    public function edit(ServiceRequest $service_request) // <-- Nombre idéntico a la ruta
     {
         $categories = Service::all();
 
         return view('request.Admin.edit', [
-            'service' => $service,     // ⚠️ Aquí es clave
+            'service_request' => $service_request,
             'categories' => $categories
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // 2. Método Update
+    public function update(ServiceRequestRequest $request, ServiceRequest $service_request) // <-- Magia activa automáticamente
     {
-        //
+        // Al usar 'ServiceRequest', Laravel ahora sí entiende la relación con {service_request} en la ruta
+        $service_request->update($request->validated());
+
+        session()->flash('status', 'Servicio actualizado');
+
+        return to_route('request.Admin.list');
     }
 
     /**
