@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\ServicesRequestController as AdminServiceRequestController;
@@ -32,6 +33,7 @@ Route::get('/blog/create',[PostController::class, 'create'])->name('posts.create
 
 Route::get('services',[ServiceController::class,'index'])->name('services.index');
 
+
 Route::get('/admin/services',[AdminServiceController::class,'index'])->name('services.Admin.list');
 
 Route::get('/admin/servicesAdd',[AdminServiceController::class,'create'])->name('services.Admin.add');
@@ -57,6 +59,19 @@ Route::get('/services/{service}',[ServiceController::class,'show'])->name('servi
 Route::post('services_request',[ServiceRequestController::class,'store'])->name('services_request.store');
 
 Route::get('/blog/{post}',[PostController::class, 'show'])->name('posts.show');
+
+
+Route::get('/admin/categories',[CategoryController::class,'index'])->name('categories.Admin.list');
+
+Route::get('/admin/categoriesadd',[CategoryController::class,'create'])->name('categories.Admin.add');
+
+Route::post('/admin/categoriesstore',[CategoryController::class,'store'])->name('categories.Admin.store');
+
+Route::get('/admin/categories/{category}/edit',[CategoryController::class,'edit'])->name('categories.Admin.edit');
+
+Route::patch('/admin/categories/{category}/update',[CategoryController::class,'update'])->name('categories.Admin.update');
+
+Route::delete('/admin/categories/{category}/destroy',[CategoryController::class,'destroy'])->name('categories.Admin.destroy');
 
 
 Route::view('nosotros','about')->name('about');

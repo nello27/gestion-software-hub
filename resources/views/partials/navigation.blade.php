@@ -38,6 +38,7 @@
                         </li>
                         <li><a class="dropdown-item" href="{{ route("request.Admin.list") }}">Cotizaciones</a></li>
                         <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{{ route('categories.Admin.list') }}">Categorías</a></li>
                         <li><a class="dropdown-item" href="#">Otra Opción "En desarrollo"</a></li>
                     </ul>
                 </li>
