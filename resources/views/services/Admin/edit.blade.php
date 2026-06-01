@@ -56,6 +56,8 @@
                                       placeholder="Descripción del servicio">{{ $service->description }}</textarea>
                         </div>
 
+                        
+
                         <!-- Precio -->
                         <div class="mb-4">
                             <label for="price" class="form-label">Precio</label>

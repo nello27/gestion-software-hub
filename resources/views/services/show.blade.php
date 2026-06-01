@@ -8,7 +8,16 @@
             <h3>Contacta con {{ $nombre ?? 'nuestro equipo' }}</h3>
         </div>
         <div class="card-body p-4">
-
+        @if ($errors->any())
+            <div style="background-color: #f8d7da; color: #721c24; padding: 15px; margin-bottom: 20px; border: 1px solid #f5c6cb; border-radius: 4px;">
+                <strong>¡Errores de validación!:</strong>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+            </div>
+        @endif
         <!--@dump($errors->all())-->
             <form action="{{ route('services_request.store') }}" method="POST">
                 @csrf {{-- Token de seguridad obligatorio en Laravel --}}

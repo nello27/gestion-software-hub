@@ -62,18 +62,23 @@
 
                         <div class="mb-3">
                             <label for="category" class="form-label">Servicio</label>
+
+
                             
-                        <select class="form-select" id="category" name="category_id">
-                            <option value="" disabled>Seleccione un Servicio</option>
+                        <select class="form-select" id="category" name="service_id">
+                            <option value="" disabled {{ old('service_id', $service_request->service_id) ? '' : 'selected' }}>Seleccione un Servicio</option>
 
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}"
-                                    {{ old('category_id', $service_request->category_id) == $category->id ? 'selected' : '' }}>
+                                    {{ old('service_id', $service_request->service_id) == $category->id ? 'selected' : '' }}>
                                     {{ $category->name }}
                                 </option>
                             @endforeach
                         </select>
-                           
+
+                   
+                    
+             
                         </div>
 
                         <!-- Mensaje -->

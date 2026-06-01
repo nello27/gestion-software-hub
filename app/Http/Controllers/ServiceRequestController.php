@@ -50,7 +50,7 @@ class ServiceRequestController extends Controller
         $serviceRequest = ServiceRequest::create($data);
 
         // 🔥 Enviar correo al usuario
-        Mail::to($data['email'])->send(new ServiceRequestCreated($serviceRequest));
+        #Mail::to($data['email'])->send(new ServiceRequestCreated($serviceRequest));
 
         session()->flash(
             'status',
