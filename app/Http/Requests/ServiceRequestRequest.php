@@ -21,14 +21,15 @@ class ServiceRequestRequest extends FormRequest
      */
     public function rules(): array
     {
-            return [
-                'service_id' => ['required', 'integer', 'exists:services,id'],
-                'name'       => ['required', 'string', 'max:255'],
-                'email' => ['required','email:rfc,dns'],
-                'phone' => ['nullable', 'regex:/^[0-9+\-\s]{7,20}$/'],
-                'message'    => ['required', 'string', 'max:2000'],
-                #'price' => ['required', 'numeric', 'min:0'],
-            ];
+        return [
+            'service_id' => ['required', 'integer', 'exists:services,id'],
+            'name'       => ['required', 'string', 'max:255'],
+            'email'      => ['required', 'email:rfc,dns'],
+            'phone'      => ['nullable', 'regex:/^[0-9+\-\s]{7,20}$/'],
+            'message'    => ['required', 'string', 'max:2000'],
+            // Cambio aquí: Sintaxis de array e inyección de regla 'Rule' opcional si se quiere escalar
+            'status'     => ['required', 'string', 'in:Pendiente,Aceptada,En proceso,Finalizada'],
+        ];
     }
 
     public function messages()
@@ -40,6 +41,7 @@ class ServiceRequestRequest extends FormRequest
             'phone.regex' => 'Debe ingresar un télefono válido.',
             'service_id.exists' => 'El servicio seleccionado no es válido.',
             'message'    => 'Por favor ingrese su Mensaje.',
+            'status' => 'Por favor ingrese el estado de la solicitud.',
 
         ];
     }

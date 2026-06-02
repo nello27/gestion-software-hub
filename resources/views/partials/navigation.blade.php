@@ -51,11 +51,6 @@
                     </a>
                 </li>
 
-                <!--<li class="nav-item">
-                    <a class="nav-link text-white" href="{{ route('posts.index') }}">
-                        Blog
-                    </a>
-                </li>-->
 
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('about') }}">
@@ -63,13 +58,38 @@
                     </a>
                 </li>
 
-                <!-- CTA -->
-                <!--<li class="nav-item ms-lg-3">
-                    <a class="btn btn-primary px-4 rounded-pill fw-semibold"
-                       href="{{ route('contact') }}">
-                        Contacto
+
+                @auth
+                    
+                <div class="d-flex align-items-center gap-3"></div>            
+                        <span class="text-white bg-dark border border-secondary px-3 py-1.5 rounded text-sm">
+                            <span class="text-white font-weight-normal">Bienvenido,</span> {{ auth()->user()->name }}
+                        </span>
+
+                        <form method="POST" action="{{ route('logout') }}" class="m-0 p-0">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger btn-sm px-3 font-weight-bold cursor-pointer">
+                                Cerrar Sesión
+                            </button>
+                        </form>
+
+                </div>
+                @endauth
+                <div class="flex items-center space-x-4">
+
+                @guest
+                    <a href="{{ route('login') }}" 
+                    class="text-sm font-medium text-slate-300 hover:text-white transition focus:outline-none">
+                        Iniciar Sesión
                     </a>
-                </li>-->
+                    
+                    <a href="{{ route('register') }}" 
+                    class="text-sm font-semibold text-white bg-blue-600 hover:bg-blue-500 px-4 py-1.5 rounded-xl shadow transition duration-150 text-center">
+                        Registrarse
+                    </a>
+                @endguest
+
+            </div>
 
             </ul>
         </div>

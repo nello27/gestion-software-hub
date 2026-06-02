@@ -1,5 +1,6 @@
 <x-layout meta-title="Editar Servicios">
 
+
 <div class="container py-5">
 
     <div class="row justify-content-center">
@@ -95,12 +96,23 @@
                         <div class="mb-4">
                             <label for="status" class="form-label">Estado</label>
                             <div class="input-group">
-                                <input type="text" 
-                                       class="form-control text-end" 
-                                       id="status" 
-                                       name="status"
-                                       placeholder="Estado"
-                                       value="{{ $service_request->status }}">
+                                <select class="form-select text-end @error('status') is-invalid @enderror" 
+                                        id="status" 
+                                        name="status"
+                                        required>
+                                    <option value="" disabled {{ is_null($service_request->status) && !old('status') ? 'selected' : '' }}>Seleccione un estado</option>
+                                    
+                                    <option value="Pendiente" {{ old('status', $service_request->status) == 'Pendiente' ? 'selected' : '' }}>Pendiente</option>
+                                    <option value="Aceptada" {{ old('status', $service_request->status) == 'Aceptada' ? 'selected' : '' }}>Aceptada</option>
+                                    <option value="En proceso" {{ old('status', $service_request->status) == 'En proceso' ? 'selected' : '' }}>En proceso</option>
+                                    <option value="Finalizada" {{ old('status', $service_request->status) == 'Finalizada' ? 'selected' : '' }}>Finalizada</option>
+                                </select>
+                                
+                                @error('status')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 

@@ -22,57 +22,88 @@ Route::get('/test-email', function () {
     return "Revisa tu bandeja de entrada en Mailtrap.io";
 });
 
-
+// 🌍 RUTA PÚBLICA (Cualquiera puede entrar, logueado o no)
 Route::view('/', 'welcome')->name('home');
-
-Route::view('contacto','contact')->name('contact');
-
-Route::get('blog',[PostController::class, 'index'])->name('posts.index');
-
-Route::get('/blog/create',[PostController::class, 'create'])->name('posts.create');
-
 Route::get('services',[ServiceController::class,'index'])->name('services.index');
-
-
-Route::get('/admin/services',[AdminServiceController::class,'index'])->name('services.Admin.list');
-
-Route::get('/admin/servicesAdd',[AdminServiceController::class,'create'])->name('services.Admin.add');
-
-Route::post('/admin/servicesstore',[AdminServiceController::class,'store'])->name('services.Admin.store');
-
-Route::patch('/admin/services/{service}',[AdminServiceController::class,'update'])->name('services.Admin.update');
-
-Route::get('/admin/services/{service}/edit',[AdminServiceController::class,'edit'])->name('services.Admin.edit');
-
-Route::delete('/admin/services/{service}/destroy',[AdminServiceController::class,'destroy'])->name('services.Admin.destroy');
-
-
-Route::get('/admin/services_request',[AdminServiceRequestController::class,'index'])->name('request.Admin.list');
-
-Route::patch('/admin/services_request/{service_request}', [AdminServiceRequestController::class, 'update'])->name('request.Admin.update');
-
-Route::get('/admin/services_request/{service_request}/edit',[AdminServiceRequestController::class,'edit'])->name('request.Admin.edit');
-
-
-Route::get('/services/{service}',[ServiceController::class,'show'])->name('services.show');
-
-Route::post('services_request',[ServiceRequestController::class,'store'])->name('services_request.store');
-
-Route::get('/blog/{post}',[PostController::class, 'show'])->name('posts.show');
-
-
-Route::get('/admin/categories',[CategoryController::class,'index'])->name('categories.Admin.list');
-
-Route::get('/admin/categoriesadd',[CategoryController::class,'create'])->name('categories.Admin.add');
-
-Route::post('/admin/categoriesstore',[CategoryController::class,'store'])->name('categories.Admin.store');
-
-Route::get('/admin/categories/{category}/edit',[CategoryController::class,'edit'])->name('categories.Admin.edit');
-
-Route::patch('/admin/categories/{category}/update',[CategoryController::class,'update'])->name('categories.Admin.update');
-
-Route::delete('/admin/categories/{category}/destroy',[CategoryController::class,'destroy'])->name('categories.Admin.destroy');
-
-
 Route::view('nosotros','about')->name('about');
+#Route::view('contacto','contact')->name('contact');
+#Route::get('blog',[PostController::class, 'index'])->name('posts.index');
+#Route::get('/blog/create',[PostController::class, 'create'])->name('posts.create');
+#Route::get('/blog/{post}',[PostController::class, 'show'])->name('posts.show');
+
+// 🔒 RUTAS PROTEGIDAS (Obligatorio haber iniciado sesión)
+Route::middleware(['auth'])->group(function () {
+
+
+    // 👤 Zona exclusiva para CUSTOMERS (Usando Route::group para meter el Callback)
+    Route::group(['middleware' => function ($request, $next) {
+        if ($request->user()->isCustomer()) {
+            return $next($request);
+        }
+        abort(403, 'No tienes permisos de cliente para acceder aquí.');
+    }], function () {
+        
+        // Agrega aquí más rutas de clientes...
+        
+        Route::post('services_request',[ServiceRequestController::class,'store'])->name('services_request.store');
+        Route::get('/services/{service}',[ServiceController::class,'show'])->name('services.show');
+
+    });
+
+    // 👑 Zona exclusiva para ADMINS (Usando Route::group para meter el Callback)
+        Route::group(['middleware' => function ($request, $next) {
+            if ($request->user()->isAdmin()) {
+                return $next($request);
+            }
+            abort(403, 'Acceso denegado. Se requieren permisos de administrador.');
+        }], function () {
+        
+        // Agrega aquí más rutas de administrador...
+        Route::get('/admin/services',[AdminServiceController::class,'index'])->name('services.Admin.list');
+
+        Route::get('/admin/servicesAdd',[AdminServiceController::class,'create'])->name('services.Admin.add');
+
+        Route::post('/admin/servicesstore',[AdminServiceController::class,'store'])->name('services.Admin.store');
+
+        Route::patch('/admin/services/{service}',[AdminServiceController::class,'update'])->name('services.Admin.update');
+
+        Route::get('/admin/services/{service}/edit',[AdminServiceController::class,'edit'])->name('services.Admin.edit');
+
+        Route::delete('/admin/services/{service}/destroy',[AdminServiceController::class,'destroy'])->name('services.Admin.destroy');
+
+
+        Route::get('/admin/services_request',[AdminServiceRequestController::class,'index'])->name('request.Admin.list');
+
+        Route::patch('/admin/services_request/{service_request}', [AdminServiceRequestController::class, 'update'])->name('request.Admin.update');
+
+        Route::get('/admin/services_request/{service_request}/edit',[AdminServiceRequestController::class,'edit'])->name('request.Admin.edit');
+
+
+        
+
+        Route::get('/admin/categories',[CategoryController::class,'index'])->name('categories.Admin.list');
+
+        Route::get('/admin/categoriesadd',[CategoryController::class,'create'])->name('categories.Admin.add');
+
+        Route::post('/admin/categoriesstore',[CategoryController::class,'store'])->name('categories.Admin.store');
+
+        Route::get('/admin/categories/{category}/edit',[CategoryController::class,'edit'])->name('categories.Admin.edit');
+
+        Route::patch('/admin/categories/{category}/update',[CategoryController::class,'update'])->name('categories.Admin.update');
+
+        Route::delete('/admin/categories/{category}/destroy',[CategoryController::class,'destroy'])->name('categories.Admin.destroy');
+
+    });
+
+
+});
+
+
+
+
+
+
+
+
+require __DIR__.'/auth.php';
 
