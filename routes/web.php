@@ -7,7 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\ServicesRequestController as AdminServiceRequestController;
-
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\CustomerMiddleware;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -36,13 +37,7 @@ Route::middleware(['auth'])->group(function () {
 
 
     // 👤 Zona exclusiva para CUSTOMERS (Usando Route::group para meter el Callback)
-    Route::group(['middleware' => function ($request, $next) {
-        if ($request->user()->isCustomer()) {
-            return $next($request);
-        }
-        abort(403, 'No tienes permisos de cliente para acceder aquí.');
-    }], function () {
-        
+    Route::middleware([CustomerMiddleware::class])->group(function () {
         // Agrega aquí más rutas de clientes...
         
         Route::post('services_request',[ServiceRequestController::class,'store'])->name('services_request.store');
@@ -51,12 +46,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // 👑 Zona exclusiva para ADMINS (Usando Route::group para meter el Callback)
-        Route::group(['middleware' => function ($request, $next) {
-            if ($request->user()->isAdmin()) {
-                return $next($request);
-            }
-            abort(403, 'Acceso denegado. Se requieren permisos de administrador.');
-        }], function () {
+    Route::middleware([AdminMiddleware::class])->group(function () {
         
         // Agrega aquí más rutas de administrador...
         Route::get('/admin/services',[AdminServiceController::class,'index'])->name('services.Admin.list');
