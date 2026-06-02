@@ -54,9 +54,11 @@
                     @enderror
                 
                 </div>
-
-
                 
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="status" name="status" placeholder="Estado de la solicitud" value="Pendiente" hidden>
+                </div>
+
                 <div class="mb-3">
                     <input type="hidden" name="service_id" value="{{ $services->id }}">
                     <strong for="service_id" class="form-label">Servicio seleccionado: {{ $services->name }}</strong>                    
