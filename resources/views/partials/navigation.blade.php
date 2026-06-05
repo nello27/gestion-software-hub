@@ -39,6 +39,7 @@
                         <li><a class="dropdown-item" href="{{ route("request.Admin.list") }}">Cotizaciones</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="{{ route('categories.Admin.list') }}">Categorías</a></li>
+                        <li><a class="dropdown-item" href="{{ route('customers.Admin.list') }}">Usuarios</a></li>
                         <li><a class="dropdown-item" href="#">Otra Opción "En desarrollo"</a></li>
                     </ul>
                 </li>
@@ -48,6 +49,12 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{{ route('services.index') }}">
                         Servicios
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="{{ route('customer.edit') }}">
+                        Perfil
                     </a>
                 </li>
 

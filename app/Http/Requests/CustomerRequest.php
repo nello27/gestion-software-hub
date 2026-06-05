@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCustomerRequest extends FormRequest
+class CustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,23 +21,25 @@ class UpdateCustomerRequest extends FormRequest
      */
     public function rules(): array
     {
-        // Buscamos el ID del usuario logueado en la sesión
-        $userId = auth()->id();
+        // Obtenemos el cliente que se está editando desde la ruta
+        $customer = $this->route('customer'); 
 
         return [
-            'name'     => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'document' => ['required', 'string', 'max:50'],
-            'phone'    => ['nullable', 'string', 'max:20'],
-            'address'  => ['nullable', 'string', 'max:255'],
             
-            // Excluimos el ID del usuario actual para que le permita conservar su mismo correo
-            'email'    => [
+            // 🚀 CORREGIDO: Apuntamos a la tabla 'users' e ignoramos el ID del usuario vinculado
+            'email' => [
                 'required', 
                 'string', 
                 'email', 
                 'max:255', 
-                'unique:users,email,' . $userId
+                'unique:users,email,' . $customer->user_id
             ],
+            
+            'phone' => ['nullable', 'string', 'max:20'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'role' => ['required', 'string', 'in:customer,admin'], // Validamos el rol si viene en el form
         ];
     }
 

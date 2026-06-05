@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\Admin\CustomerController as AdminCustomerController;
+use App\Http\Controllers\CustomerController as CustomCustomerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ServiceRequestController;
 use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
@@ -42,6 +44,9 @@ Route::middleware(['auth'])->group(function () {
         
         Route::post('services_request',[ServiceRequestController::class,'store'])->name('services_request.store');
         Route::get('/services/{service}',[ServiceController::class,'show'])->name('services.show');
+        Route::get('/customer/profile',[CustomCustomerController::class,'edit'])->name('customer.edit');
+        Route::patch('/customer/profile/update',[CustomCustomerController::class,'update'])->name('customer.update');
+
 
     });
 
@@ -83,6 +88,13 @@ Route::middleware(['auth'])->group(function () {
 
         Route::delete('/admin/categories/{category}/destroy',[CategoryController::class,'destroy'])->name('categories.Admin.destroy');
 
+        
+        Route::get('/admin/customers',[AdminCustomerController::class,'index'])->name('customers.Admin.list');
+        Route::get('/admin/customers/{customer}/edit',[AdminCustomerController::class,'edit'])->name('customers.Admin.edit');
+        
+
+        Route::patch('/admin/customers/{customer}/update',[AdminCustomerController::class,'update'])->name('customers.Admin.update');
+        Route::delete('/admin/customers/{customer}/destroy',[AdminCustomerController::class,'destroy'])->name('customers.Admin.destroy');
     });
 
 
