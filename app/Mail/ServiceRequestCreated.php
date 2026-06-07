@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Service_Request;
+use App\Models\ServiceRequest;
 
 class ServiceRequestCreated extends Mailable
 {
@@ -19,7 +19,7 @@ class ServiceRequestCreated extends Mailable
      */
     public $serviceRequest;
 
-    public function __construct(Service_Request $serviceRequest)
+    public function __construct(ServiceRequest $serviceRequest)
     {
         $this->serviceRequest = $serviceRequest;
     }
