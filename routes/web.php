@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ServicesRequestController as AdminServiceRequestC
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\CustomerMiddleware;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Auth\NewPasswordController;
 
 
 Route::get('/test-email', function () {
@@ -29,6 +30,8 @@ Route::get('/test-email', function () {
 Route::view('/', 'welcome')->name('home');
 Route::get('services',[ServiceController::class,'index'])->name('services.index');
 Route::view('nosotros','about')->name('about');
+Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+     ->name('password.reset');
 #Route::view('contacto','contact')->name('contact');
 #Route::get('blog',[PostController::class, 'index'])->name('posts.index');
 #Route::get('/blog/create',[PostController::class, 'create'])->name('posts.create');
@@ -42,7 +45,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware([CustomerMiddleware::class])->group(function () {
         // Agrega aquí más rutas de clientes...
         
-        Route::post('services_request',[ServiceRequestController::class,'store'])->name('services_request.store');
+        Route::post('services_request/{user?}', [ServiceRequestController::class, 'store'])->name('services_request.store');
         Route::get('/services/{service}',[ServiceController::class,'show'])->name('services.show');
         Route::get('/customer/profile',[CustomCustomerController::class,'edit'])->name('customer.edit');
         Route::patch('/customer/profile/update',[CustomCustomerController::class,'update'])->name('customer.update');
@@ -99,12 +102,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 });
-
-
-
-
-
-
 
 
 require __DIR__.'/auth.php';

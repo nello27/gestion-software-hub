@@ -1,7 +1,5 @@
 <x-layout meta-title="Contactenos" >
 
-
-
 <div class="container-sm py-3 d-flex justify-content-center">
     <div class="card contact-card shadow-sm border-0" style="max-width: 800px; width: 100%;">
         <div class="card-header bg-dark text-white text-center py-2">
@@ -18,13 +16,15 @@
                     </ul>
             </div>
         @endif
-        <!--@dump($errors->all())-->
-            <form action="{{ route('services_request.store') }}" method="POST">
+
+            <form action="{{ route('services_request.store', ['user' => auth()->id()]) }}" method="POST">
                 @csrf {{-- Token de seguridad obligatorio en Laravel --}}
                 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nombre completo</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Ej: Juan Pérez" value="{{ old('name') }}">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Ej: Juan Pérez" 
+                           value="{{ auth()->check() ? auth()->user()->name : old('name') }}"
+                           {{ auth()->check() ? 'readonly' : '' }}> {{-- Bloquea el campo si está logueado --}}
                     
                     @error('name')
                         <div class="invalid-feedback d-block">
@@ -35,24 +35,25 @@
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Correo electrónico</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com" value="{{ old('email') }}">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="nombre@ejemplo.com" 
+                           value="{{ auth()->check() ? auth()->user()->email : old('email') }}"
+                           {{ auth()->check() ? 'readonly' : '' }}> {{-- Bloquea el campo si está logueado --}}
                     @error('email')
                         <div class="invalid-feedback d-block">
                             {{ $message }}
                         </div>
                     @enderror
-                
                 </div>
 
                 <div class="mb-3">
                 <label for="phone" class="form-label">Télefono</label>
-                    <input type="phone" class="form-control" id="phone" name="phone" placeholder="+57 777 777" value="{{ old('phone') }}">
+                    <input type="phone" class="form-control" id="phone" name="phone" placeholder="+57 777 777" 
+                           value="{{ auth()->user()?->customer?->phone ?? old('phone') }}">
                     @error('phone')
                         <div class="invalid-feedback d-block">
                             {{ $message }}
                         </div>
                     @enderror
-                
                 </div>
                 
                 <div class="mb-3">

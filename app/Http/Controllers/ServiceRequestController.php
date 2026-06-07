@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\ServiceRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\ServiceRequestRequest;
 
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ServiceRequestCreated;
+use Illuminate\Support\Facades\Auth; // 👈 Importante para el controlador
 
 class ServiceRequestController extends Controller
 {
@@ -30,36 +32,29 @@ class ServiceRequestController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ServiceRequestRequest $request)
+    public function store(ServiceRequestRequest $request, User $user = null)
     {
-
-        /*$service_Request = new Service_Request;
-
-        $service_Request->service_id = $request->input('service_id');
-        $service_Request->name = $request->input('name');
-        $service_Request->email = $request->input('email');
-        $service_Request->phone = $request->input('phone');
-        $service_Request->message = $request->input('message');
-        $service_Request->status = 'Pendiente';
-        
-        $service_Request->save();*/
-
         $data = $request->validated();
         $data['status'] = 'Pendiente';
 
+        // Si el usuario está autenticado, obligamos a que los datos sean los de su sesión
+        if (Auth::check()) {
+            $user = Auth::user();
+            $data['name'] = $user->name;
+            $data['email'] = $user->email;
+            $data['user_id'] = $user->id;
+        }
+
         $serviceRequest = ServiceRequest::create($data);
-
-        // 🔥 Enviar correo al usuario
-        #Mail::to($data['email'])->send(new ServiceRequestCreated($serviceRequest));
-
+        
+        Mail::to($serviceRequest->email)->send(new ServiceRequestCreated($serviceRequest));
+        
         session()->flash(
             'status',
             'Su solicitud fue enviada. Recibirá un correo de confirmación.'
         );
 
         return to_route('services.index');
-
-        //return $request;
     }
 
     /**
