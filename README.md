@@ -36,7 +36,7 @@ Si deseas clonar este proyecto y ejecutarlo en tu entorno local, sigue estos sen
 
 ### 1. Clonar el repositorio e instalar dependencias de PHP
 ```bash
-git clone [https://github.com/nello27/Laravel-Blog.git](https://github.com/nello27/Laravel-Blog.git)
+git clone https://github.com/nello27/gestion-software-hub.git
 cd Laravel-Blog
 composer install
 
